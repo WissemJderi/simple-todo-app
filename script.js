@@ -7,12 +7,14 @@ let todoCount = 0;
 // Load todos from localStorage
 const loadTodos = () => {
   const todos = JSON.parse(localStorage.getItem("todos")) || [];
-  todos.forEach(todo => {
+  todos.forEach((todo) => {
     displayedTodos.innerHTML += `<div id="todo-container-${todo.id}">
-      <li id="todo-${todo.id}" style="text-decoration: ${todo.done ? 'line-through' : 'none'}">${todo.text}</li>
-      <button class="btn btn-danger" onclick="deleteTod(${todo.id})">Delete</button>
-      <button class="btn btn-success" onclick="doneTod(${todo.id})">Done</button>
-      <button class="btn btn-primary" onclick="editTod(${todo.id})">Edit</button>
+      <li id="todo-${todo.id}" style="text-decoration: ${
+      todo.done ? "line-through" : "none"
+    }">${todo.text}</li>
+      <button onclick="deleteTod(${todo.id})">Delete</button>
+      <button onclick="doneTod(${todo.id})">Done</button>
+      <button onclick="editTod(${todo.id})">Edit</button>
     </div>`;
     todoCount = Math.max(todoCount, todo.id + 1);
   });
@@ -22,10 +24,10 @@ const loadTodos = () => {
 // Save todos to localStorage
 const saveTodos = () => {
   const todos = [];
-  displayedTodos.querySelectorAll("li").forEach(li => {
+  displayedTodos.querySelectorAll("li").forEach((li) => {
     const id = parseInt(li.id.split("-")[1]);
     const text = li.textContent;
-    const done = li.style.textDecoration === 'line-through';
+    const done = li.style.textDecoration === "line-through";
     todos.push({ id, text, done });
   });
   localStorage.setItem("todos", JSON.stringify(todos));
@@ -38,9 +40,9 @@ const displayTodo = () => {
   if (todoInputValue) {
     displayedTodos.innerHTML += `<div id="todo-container-${todoCount}">
       <li id="todo-${todoCount}">${todoInputValue}</li>
-      <button class="btn btn-danger" onclick="deleteTod(${todoCount})">Delete</button>
-      <button class="btn btn-success" onclick="doneTod(${todoCount})">Done</button>
-      <button class="btn btn-primary" onclick="editTod(${todoCount})">Edit</button>
+      <button  onclick="deleteTod(${todoCount})">Delete</button>
+      <button  onclick="doneTod(${todoCount})">Done</button>
+      <button  onclick="editTod(${todoCount})">Edit</button>
     </div>`;
     todoCount++;
     saveTodos();
@@ -81,7 +83,10 @@ function deleteTod(id) {
 function doneTod(id) {
   const todoItem = document.getElementById(`todo-${id}`);
   if (todoItem) {
-    todoItem.style.textDecoration = todoItem.style.textDecoration === 'line-through' ? 'none' : 'line-through';
+    todoItem.style.textDecoration =
+      todoItem.style.textDecoration === "line-through"
+        ? "none"
+        : "line-through";
     saveTodos();
   }
 }
