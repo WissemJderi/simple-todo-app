@@ -7,9 +7,14 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <h1 class="text-center">Simple Todo App</h1>
-  <input type="text" id="todo" />
-  <button id="add">Add Todo</button>
-  <div id="todo-counter">Remaining todos: 0</div>
+  <div class="add-todo">
+    <input type="text" id="todo" />
+    <button id="add" class="add-btn">Add Todo</button>
+  </div>
+
+  <div class="todo-counter">
+    Remaining todos: <span class="remaining-todos" id="todo-counter">0</span>
+  </div>
   <ul id="todos"></ul>
   <body>
     <script src="script.js"></script>

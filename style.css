@@ -1,9 +1,72 @@
-
-#add {
-  margin: 20px 0 0 20px;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
-#todo {
-  margin-left: 10%;
-  margin-right: 10%;
-  width: 80%;
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+input {
+  border: none;
+  border-radius: 50px;
+  padding-left: 20px;
+}
+
+.add-btn {
+  border: none;
+  border-radius: 50px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.add-todo {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.todo-counter {
+  margin-top: 15px;
+  font-size: 24px;
+  text-align: center;
+}
+.remaining-todos {
+  color: #4caf50;
+}
+#todos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.del-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.done-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.edit-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+li {
+  margin: 20px;
 }

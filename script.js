@@ -12,9 +12,9 @@ const loadTodos = () => {
       <li id="todo-${todo.id}" style="text-decoration: ${
       todo.done ? "line-through" : "none"
     }">${todo.text}</li>
-      <button onclick="deleteTod(${todo.id})">Delete</button>
-      <button onclick="doneTod(${todo.id})">Done</button>
-      <button onclick="editTod(${todo.id})">Edit</button>
+      <button onclick="deleteTod(${todo.id})" class="del-btn">Delete</button>
+      <button onclick="doneTod(${todo.id})" class="done-btn">Done</button>
+      <button onclick="editTod(${todo.id})" class="edit-btn">Edit</button>
     </div>`;
     todoCount = Math.max(todoCount, todo.id + 1);
   });
@@ -40,9 +40,9 @@ const displayTodo = () => {
   if (todoInputValue) {
     displayedTodos.innerHTML += `<div id="todo-container-${todoCount}">
       <li id="todo-${todoCount}">${todoInputValue}</li>
-      <button  onclick="deleteTod(${todoCount})">Delete</button>
-      <button  onclick="doneTod(${todoCount})">Done</button>
-      <button  onclick="editTod(${todoCount})">Edit</button>
+      <button  onclick="deleteTod(${todoCount})" class="del-btn">Delete</button>
+      <button  onclick="doneTod(${todoCount})" class="done-btn">Done</button>
+      <button  onclick="editTod(${todoCount})" class="edit-btn">Edit</button>
     </div>`;
     todoCount++;
     saveTodos();
@@ -55,7 +55,7 @@ const displayTodo = () => {
 // Update the counter
 const updateCounter = () => {
   const remainingTodos = displayedTodos.querySelectorAll("li").length;
-  todoCounter.textContent = `Remaining todos: ${remainingTodos}`;
+  todoCounter.textContent = `${remainingTodos}`;
 };
 
 // Add todo on button click
