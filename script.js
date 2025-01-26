@@ -6,11 +6,20 @@ let todoCount = 0;
 // Load todos from localStorage
 const loadTodos = () => {
   const todos = JSON.parse(localStorage.getItem("todos")) || [];
-  todos.forEach(todo => {
+  todos.forEach((todo) => {
     displayedTodos.innerHTML += `<div id="todo-container-${todo.id}">
-      <li id="todo-${todo.id}">${todo.text}</li>
-      <button class="btn btn-danger" onclick="deleteTod(${todo.id})">Delete</button>
-      <button class="btn btn-success" onclick="doneTod(${todo.id})">Done</button>
+      <li id="todo-${todo.id}" style="text-decoration: ${
+      todo.done ? "line-through" : "none"
+    }">${todo.text}</li>
+      <button class="btn btn-danger" onclick="deleteTod(${
+        todo.id
+      })">Delete</button>
+      <button class="btn btn-success" onclick="doneTod(${
+        todo.id
+      })">Done</button>
+      <button class="btn btn-primary" onclick="editTod(${
+        todo.id
+      })">Edit</button>
     </div>`;
     todoCount = Math.max(todoCount, todo.id + 1);
   });
@@ -19,10 +28,11 @@ const loadTodos = () => {
 // Save todos to localStorage
 const saveTodos = () => {
   const todos = [];
-  displayedTodos.querySelectorAll("li").forEach(li => {
+  displayedTodos.querySelectorAll("li").forEach((li) => {
     const id = parseInt(li.id.split("-")[1]);
     const text = li.textContent;
-    todos.push({ id, text });
+    const done = li.style.textDecoration === "line-through";
+    todos.push({ id, text, done });
   });
   localStorage.setItem("todos", JSON.stringify(todos));
 };
@@ -35,6 +45,7 @@ const displayTodo = () => {
       <li id="todo-${todoCount}">${todoInputValue}</li>
       <button class="btn btn-danger" onclick="deleteTod(${todoCount})">Delete</button>
       <button class="btn btn-success" onclick="doneTod(${todoCount})">Done</button>
+      <button class="btn btn-primary" onclick="editTod(${todoCount})">Edit</button>
     </div>`;
     todoCount++;
     saveTodos();
@@ -69,7 +80,23 @@ function deleteTod(id) {
 function doneTod(id) {
   const todoItem = document.getElementById(`todo-${id}`);
   if (todoItem) {
-    todoItem.style.textDecoration = "line-through";
+    todoItem.style.textDecoration =
+      todoItem.style.textDecoration === "line-through"
+        ? "none"
+        : "line-through";
+    saveTodos();
+  }
+}
+
+// Edit todo
+function editTod(id) {
+  const todoItem = document.getElementById(`todo-${id}`);
+  if (todoItem) {
+    const newText = prompt("Edit your todo:", todoItem.textContent);
+    if (newText !== null && newText.trim() !== "") {
+      todoItem.textContent = newText;
+      saveTodos();
+    }
   }
 }
 
